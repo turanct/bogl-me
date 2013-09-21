@@ -1,0 +1,8 @@
+# Exclude the composer.phar package from our repo
+/composer.phar
+
+# Exclude the vendor directory from our repo
+/vendor/*
+
+# Exclude the html directory from our repo
+#/html/*

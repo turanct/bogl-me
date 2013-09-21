@@ -1,0 +1,26 @@
+{
+	"name": "turanct/blog",
+	"description": "Simple static blog system",
+	"type": "application",
+	"homepage": "http://bitbucket.org/turanct/blog",
+	"license": "MIT",
+	"authors": [
+		{
+			"name": "Toon Daelman",
+			"email": "spinnewebber_toon@hotmail.com",
+			"homepage": "http://turanct.wordpress.com",
+			"role": "Developer"
+		}
+	],
+	"require": {
+		"pimple/pimple": "dev-master",
+		"twig/twig": "dev-master",
+		"dflydev/markdown": "dev-master"
+	},
+	"minimum-stability": "dev",
+	"autoload": {
+		"psr-0": {
+			"Blog": "src"
+		}
+	}
+}

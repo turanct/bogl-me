@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="page-content">
+	{{ item.content|raw }}
+</div>
+
+<div class="page-meta meta">
+	<div class="page-categories">
+		CATEGORIES: 
+		{% for category in item.categories %}
+			<a href="/categories/{{ category }}/" class="category">{{ category }}</a> 
+		{% endfor %}
+	</div>
+</div>
+
+{% endblock %}
