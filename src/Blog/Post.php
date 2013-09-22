@@ -20,7 +20,7 @@ class Post {
 	/**
 	 * @var string
 	 */
-	protected $filename;
+	public $filename;
 
 	/**
 	 * @var string
@@ -50,22 +50,6 @@ class Post {
 
 		// Get data
 		$this->init();
-	}
-
-
-	/**
-	 * Magic getter method
-	 */
-	public function __get($value) {
-		if (isset($this->$value)) {
-			return $this->$value;
-		}
-		elseif (method_exists($this, $value)) {
-			return $this->$value();
-		}
-		else {
-			return false;
-		}
 	}
 
 

@@ -39,22 +39,6 @@ class Tag {
 
 
 	/**
-	 * Magic getter method
-	 */
-	public function __get($value) {
-		if (isset($this->$value)) {
-			return $this->$value;
-		}
-		elseif (method_exists($this, $value)) {
-			return $this->$value();
-		}
-		else {
-			return false;
-		}
-	}
-
-
-	/**
 	 * Render method
 	 */
 	public function render() {
