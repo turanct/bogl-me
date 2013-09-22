@@ -42,14 +42,19 @@ class FileIterator implements \Iterator {
 	 * @param string        $type   The file type
 	 * @param string        $order  The sort order
 	 */
-	public function __construct($app, $type, $order='DESC') {
+	public function __construct($app, $type, $order='DESC', $keys = array()) {
 		// Assign
 		$this->app = $app;
 		$this->type = (string) $type;
 		$this->order = (string) $order;
 
 		// List the directory
-		$this->keys = glob($this->app['basedir'].'/markdown/'.$this->type.'s/*.md');
+		if (empty($keys)) {
+			$this->keys = glob($this->app['basedir'].'/markdown/'.$this->type.'s/*.md');
+		}
+		else {
+			$this->keys = (array) $keys;
+		}
 
 		// Order the list
 		usort($this->keys, array($this, 'sort'));
@@ -61,7 +66,7 @@ class FileIterator implements \Iterator {
 	 */
 	public function sort($a, $b) {
 		// Prepare type
-		$type = ucfirst($this->type);
+		$type = 'Blog\\'.ucfirst($this->type);
 
 		// Create objects
 		$a = new $type($this->app, basename($a, '.md'));

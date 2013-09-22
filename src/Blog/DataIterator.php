@@ -5,7 +5,7 @@ namespace Blog;
 /**
  * DataIterator class
  */
-class DataIterator implements Iterator {
+class DataIterator implements \Iterator {
 	// --------------------------------------------------------- Variables ---------------------------------------------------------
 	/**
 	 * @var \Pimple
@@ -16,6 +16,11 @@ class DataIterator implements Iterator {
 	 * @var int
 	 */
 	protected $position = 0;
+
+	/**
+	 * @var array
+	 */
+	public $entries = array();
 
 	/**
 	 * @var array
@@ -41,8 +46,38 @@ class DataIterator implements Iterator {
 		$this->app = $app;
 		$this->type = (string) $type;
 
+		// Prepare entries array
+		$entries = array();
+
+		// Set search variables
+		if ($type == 'tag') {
+			$filetypes = array('post');
+			$method = 'tags';
+		}
+		else {
+			$filetypes = array('post', 'page');
+			$method = 'categories';
+		}
+
 		// Walk through files, get tags/categories
-		// Clean up doubles
+		foreach ($filetypes as $filetype) {
+			$posts = new FileIterator($this->app, $filetype);
+			foreach ($posts as $post) {
+				foreach ($post->$method() as $category) {
+					if (!isset($entries[$category->title])) {
+						$entries[$category->title] = array('posts' => array(), 'pages' => array());
+					}
+					$entries[$category->title][$filetype.'s'][] = $post->filename;
+				}
+			}
+		}
+
+		// Order by name
+		ksort($entries);
+
+		// Assign
+		$this->entries = $entries;
+		$this->keys = array_keys($this->entries);
 	}
 
 
@@ -60,7 +95,7 @@ class DataIterator implements Iterator {
 	 */
 	public function current() {
 		// Prepare type
-		$type = ucfirst($this->type);
+		$type = 'Blog\\'.ucfirst($this->type);
 
 		// Return the current element
 		return new $type($this->app, $this->keys[$this->position]);

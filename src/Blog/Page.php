@@ -3,9 +3,9 @@ namespace Blog;
 
 
 /**
- * Post class
+ * Page class
  */
-class Post {
+class Page {
 	// --------------------------------------------------------- Variables ---------------------------------------------------------
 	/**
 	 * @var \Pimple
@@ -74,7 +74,7 @@ class Post {
 	 */
 	public function init() {
 		// Get raw file contents
-		$this->raw = @file_get_contents($this->app['basedir'].'/markdown/posts/'.$this->filename.'.md');
+		$this->raw = @file_get_contents($this->app['basedir'].'/markdown/pages/'.$this->filename.'.md');
 
 		// Get title
 		$html = $this->content();
@@ -102,25 +102,7 @@ class Post {
 	 */
 	public function render() {
 		// Get rendered html from twig
-		return $this->app['twig']->render('post.html', array('blog' => $this->app['blog'], 'item' => $this));
-	}
-
-
-	/**
-	 * Tags method
-	 */
-	public function tags() {
-		// Extract
-		$tags = preg_replace('/(.*<\!\-\-\sTAGS\:\s)([\s\d\w\-\,]*)\s\-\->(.*)/ims', '$2', $this->raw);
-		$tags = explode(', ', strtolower($tags));
-
-		// Walk through tags
-		foreach ($tags as $key => $tag) {
-			$tags[$key] = new Tag($this->app, $tag);
-		}
-
-		// Return
-		return $tags;
+		return $this->app['twig']->render('page.html', array('blog' => $this->app['blog'], 'item' => $this));
 	}
 
 

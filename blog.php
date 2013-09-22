@@ -38,8 +38,8 @@ if (!is_dir(__DIR__ . '/html')) {
 }
 
 // Walk through data types
-// foreach (array('posts', 'pages', 'tags', 'categories') as $type) {
-foreach (array('posts') as $type) {
+// foreach (array('posts') as $type) {
+foreach (array('posts', 'pages', 'tags', 'categories') as $type) {
 	// Set directory name
 	$typeDir = __DIR__ . '/html/'.$type;
 
@@ -66,7 +66,7 @@ foreach (array('posts') as $type) {
 // Render the home page
 
 // Render the 404 page
-file_put_contents(__DIR__.'/html/404.html', $app['twig']->render('404.html', array('blog' => $app['blog'])));
+file_put_contents(__DIR__.'/html/404.html', $app['twig']->render('404.html', array('blog' => $app['blog'], 'item' => array('title' => '404'))));
 
 // Copy the assets
 passthru('cd "'.__DIR__.'" && cp -R theme/assets html/');
