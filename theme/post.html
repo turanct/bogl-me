@@ -13,13 +13,13 @@
 	<div class="post-tags">
 		TAGS: 
 		{% for tag in item.tags %}
-			<a href="/tags/{{ tag }}/" class="tag">{{ tag }}</a> 
+			<a href="../../tags/{{ tag.titleshort }}/" class="tag">{{ tag.title }}</a> 
 		{% endfor %}
 	</div>
 	<div class="post-categories">
 		CATEGORIES: 
 		{% for category in item.categories %}
-			<a href="/categories/{{ category }}/" class="category">{{ category }}</a> 
+			<a href="../../categories/{{ category.titleshort }}/" class="category">{{ category.title }}</a> 
 		{% endfor %}
 	</div>
 </div>

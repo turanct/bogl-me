@@ -10,7 +10,7 @@
 	<div class="page-categories">
 		CATEGORIES: 
 		{% for category in item.categories %}
-			<a href="/categories/{{ category }}/" class="category">{{ category }}</a> 
+			<a href="../../categories/{{ category.titleshort }}/" class="category">{{ category.title }}</a> 
 		{% endfor %}
 	</div>
 </div>
