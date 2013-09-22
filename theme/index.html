@@ -2,12 +2,9 @@
 
 {% block content %}
 
-<h1>{{ item.title }}</h1>
-
-<ul>
-	{% for post in posts %}
-		<li>{{ post.date|date("Y-m-d H:i") }} <a href="{{ post.titleshort }}">{{ post.title }}</a></li>
-	{% endfor %}
-</ul>
+<div class="jumbotron">
+	<h1>Welcome</h1>
+	<p>This is a static front-page for the blog.</p>
+</div>
 
 {% endblock %}

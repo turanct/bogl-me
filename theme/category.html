@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h1>{{ item.title }}</h1>
+
+<h2>Posts</h2>
+<ul>
+	{% for post in posts %}
+		<li>{{ post.date|date("Y-m-d H:i") }} <a href="../../posts/{{ post.titleshort }}">{{ post.title }}</a></li>
+	{% endfor %}
+</ul>
+
+<h2>Pages</h2>
+<ul>
+	{% for page in pages %}
+		<li>{{ page.date|date("Y-m-d H:i") }} <a href="../../pages/{{ page.titleshort }}">{{ page.title }}</a></li>
+	{% endfor %}
+</ul>
+
+{% endblock %}
