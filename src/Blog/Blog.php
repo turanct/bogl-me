@@ -22,7 +22,7 @@ class Blog {
 		$this->app = $app;
 
 		// Get config data
-		$config = @json_decode(file_get_contents($this->app['basedir'].'/config.json'));
+		$config = @json_decode(file_get_contents($this->app['markdowndir'].'/config.json'));
 
 		// Assign
 		foreach ($config as $key => $value) {
@@ -32,29 +32,33 @@ class Blog {
 
 
 	/**
-	 * Magic getter method
+	 * Posts method
 	 */
-	public function __get($value) {
-		switch ($value) {
-			case 'posts':
-				return new FileIterator($this->app, 'post');
-				break;
+	public function posts() {
+		return new FileIterator($this->app, 'post');
+	}
 
-			case 'pages':
-				return new FileIterator($this->app, 'page');
-				break;
 
-			case 'tags':
-				return new DataIterator($this->app, 'tag');
-				break;
+	/**
+	 * Pages method
+	 */
+	public function pages() {
+		return new FileIterator($this->app, 'page');
+	}
 
-			case 'categories':
-				return new DataIterator($this->app, 'category');
-				break;
 
-			default:
-				return false;
-				break;
-		}
+	/**
+	 * Tags method
+	 */
+	public function tags() {
+		return new DataIterator($this->app, 'tag');
+	}
+
+
+	/**
+	 * Categories method
+	 */
+	public function categories() {
+		return new DataIterator($this->app, 'category');
 	}
 }
