@@ -8,6 +8,10 @@ $app = new Pimple();
 // Use the Markdown parsers
 use dflydev\markdown\MarkdownExtraParser;
 
+
+/**
+ * Directories
+ */
 // Create basedir property
 $app['basedir'] = __DIR__;
 
@@ -20,6 +24,10 @@ $app['markdowndir'] = __DIR__.'/markdown';
 // Create basedir property
 $app['themedir'] = __DIR__.'/theme';
 
+
+/**
+ * Services
+ */
 // Create shared markdown parser
 $app['markdown'] = $app->share(function() use ($app) {
 	return new MarkdownExtraParser();
@@ -41,40 +49,67 @@ $app['blog'] = $app->share(function() use ($app) {
 });
 
 
-// Create the html directory if it doesn't exist
-if (!is_dir($app['htmldir'])) {
-	mkdir($app['htmldir']);
-}
-
-// Walk through data types
-foreach (array('posts', 'pages', 'tags', 'categories') as $type) {
-	// Set directory name
-	$typeDir = $app['htmldir'].'/'.$type;
-
-	// Create the directory if it doesn't exist
-	if (!is_dir($typeDir)) {
-		mkdir($typeDir);
-	}
-
-	// Walk through items of this type
-	foreach ($app['blog']->$type() as $item) {
+/**
+ * Render all types (posts, pages, tags, categories)
+ */
+$app['render.types'] = $app->protect(function() use ($app) {
+	// Walk through data types
+	foreach (array('posts', 'pages', 'tags', 'categories') as $type) {
 		// Set directory name
-		$itemDir = $typeDir.'/'.$item->titleshort;
+		$typeDir = $app['htmldir'].'/'.$type;
 
 		// Create the directory if it doesn't exist
-		if (!is_dir($itemDir)) {
-			mkdir($itemDir);
+		if (!is_dir($typeDir)) {
+			mkdir($typeDir);
 		}
 
-		// Render the html file
-		file_put_contents($itemDir.'/index.html', $item->render());
+		// Walk through items of this type
+		foreach ($app['blog']->$type() as $item) {
+			// Set directory name
+			$itemDir = $typeDir.'/'.$item->titleshort;
+
+			// Create the directory if it doesn't exist
+			if (!is_dir($itemDir)) {
+				mkdir($itemDir);
+			}
+
+			// Render the html file
+			file_put_contents($itemDir.'/index.html', $item->render());
+		}
 	}
-}
+});
 
-// Render the home page
 
-// Render the 404 page
-file_put_contents($app['htmldir'].'/404.html', $app['twig']->render('404.html', array('blog' => $app['blog'], 'item' => array('title' => '404'))));
+/**
+ * Render the special pages and assets
+ */
+$app['render'] = $app->protect(function() use ($app) {
+	// Render the home page
 
-// Copy the assets
-passthru('cd "'.__DIR__.'" && cp -R "'.realpath($app['themedir']).'/assets" "'.realpath($app['htmldir']).'/"');
+	// Render the 404 page
+	file_put_contents($app['htmldir'].'/404.html', $app['twig']->render('404.html', array('blog' => $app['blog'], 'item' => array('title' => '404'))));
+
+	// Copy the assets
+	passthru('cd "'.__DIR__.'" && cp -R "'.realpath($app['themedir']).'/assets" "'.realpath($app['htmldir']).'/"');
+});
+
+
+/**
+ * Main
+ */
+$app['render'] = $app->protect(function() use ($app) {
+	// Create the html directory if it doesn't exist
+	if (!is_dir($app['htmldir'])) {
+		mkdir($app['htmldir']);
+	}
+
+	// Render files
+	$app['render.types']();
+	$app['render.special']();
+});
+
+
+/**
+ * Run the main routine
+ */
+$app['render']();
