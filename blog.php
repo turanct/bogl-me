@@ -83,7 +83,7 @@ $app['render.types'] = $app->protect(function() use ($app) {
 /**
  * Render the special pages and assets
  */
-$app['render'] = $app->protect(function() use ($app) {
+$app['render.special'] = $app->protect(function() use ($app) {
 	// Render the home page
 
 	// Render the 404 page
@@ -97,7 +97,7 @@ $app['render'] = $app->protect(function() use ($app) {
 /**
  * Main
  */
-$app['render'] = $app->protect(function() use ($app) {
+$app['run'] = $app->protect(function() use ($app) {
 	// Create the html directory if it doesn't exist
 	if (!is_dir($app['htmldir'])) {
 		mkdir($app['htmldir']);
@@ -112,4 +112,4 @@ $app['render'] = $app->protect(function() use ($app) {
 /**
  * Run the main routine
  */
-$app['render']();
+$app['run']();
