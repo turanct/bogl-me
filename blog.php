@@ -85,6 +85,25 @@ $app['render.types'] = $app->protect(function() use ($app) {
  */
 $app['render.special'] = $app->protect(function() use ($app) {
 	// Render the home page
+	switch ($app['blog']->home) {
+		case 'page':
+			$page = new Blog\Page($app, 'index.md');
+			$rendered = $page->render();
+			break;
+
+		case 'post':
+			$posts = new Blog\FileIterator($app, 'post');
+			$posts->rewind();
+			$post = $posts->current();
+			$rendered = $post->render();
+			break;
+
+		case 'static':
+		default:
+			$rendered = $app['twig']->render('index.html', array('blog' => $app['blog'], 'item' => array('title' => 'Home')));
+			break;
+	}
+	file_put_contents($app['htmldir'].'/index.html', $rendered);
 
 	// Render the 404 page
 	file_put_contents($app['htmldir'].'/404.html', $app['twig']->render('404.html', array('blog' => $app['blog'], 'item' => array('title' => '404'))));
