@@ -83,4 +83,4 @@ DATE should be in the `YYYY-MM-DD H:M` format, and use 24-hour times.
 
 TAGS & CATEGORIES can have multiple values, separated from each other by a comma and a space (`, `)
 
-*Please not that pages cannot have the DATE or TAGS entries, only the CATEGORIES entries.*
+*Please note that pages cannot have the DATE or TAGS entries, only the CATEGORIES entries.*
