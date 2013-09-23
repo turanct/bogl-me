@@ -42,8 +42,11 @@ class Tag {
 	 * Render method
 	 */
 	public function render() {
+		// Get template
+		$template = (file_exists($this->app['themedir'].'/tag.html')) ? 'tag.html' : 'category.html';
+
 		// Get rendered html from twig
-		return $this->app['twig']->render('index.html', array('blog' => $this->app['blog'], 'item' => $this, 'posts' => $this->getPosts()));
+		return $this->app['twig']->render($template, array('blog' => $this->app['blog'], 'item' => $this, 'posts' => $this->getPosts()));
 	}
 
 

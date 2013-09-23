@@ -85,8 +85,11 @@ class Page {
 	 * Render method
 	 */
 	public function render() {
+		// Get template
+		$template = (file_exists($this->app['themedir'].'/page.html')) ? 'page.html' : 'post.html';
+
 		// Get rendered html from twig
-		return $this->app['twig']->render('page.html', array('blog' => $this->app['blog'], 'item' => $this));
+		return $this->app['twig']->render($template, array('blog' => $this->app['blog'], 'item' => $this));
 	}
 
 

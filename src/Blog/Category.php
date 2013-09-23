@@ -43,7 +43,7 @@ class Category {
 	 */
 	public function render() {
 		// Get rendered html from twig
-		return $this->app['twig']->render('index.html', array('blog' => $this->app['blog'], 'item' => $this, 'posts' => $this->getPosts(), 'pages' => $this->getPages()));
+		return $this->app['twig']->render('category.html', array('blog' => $this->app['blog'], 'item' => $this, 'posts' => $this->getPosts(), 'pages' => $this->getPages()));
 	}
 
 
