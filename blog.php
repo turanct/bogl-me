@@ -10,22 +10,6 @@ use dflydev\markdown\MarkdownExtraParser;
 
 
 /**
- * Directories
- */
-// Create basedir property
-$app['basedir'] = __DIR__;
-
-// Create basedir property
-$app['htmldir'] = __DIR__.'/html';
-
-// Create basedir property
-$app['markdowndir'] = __DIR__.'/markdown';
-
-// Create basedir property
-$app['themedir'] = __DIR__.'/theme';
-
-
-/**
  * Services
  */
 // Create shared markdown parser
@@ -50,6 +34,57 @@ $app['blog'] = $app->share(function() use ($app) {
 
 // Type names
 $app['types'] = array('post' => 'posts', 'page' => 'pages', 'tag' => 'tags', 'category' => 'categories');
+
+
+/**
+ * Initialize the application
+ */
+$app['init'] = $app->protect(function() use ($app) {
+	// Get command line options
+	$options = getopt('i::t::o::', array('input::', 'theme::', 'output::'));
+
+	// Set input directory
+	if (isset($options['i'])) {
+		$app['markdowndir'] = realpath($options['i']);
+	}
+	elseif (isset($options['input'])) {
+		$app['markdowndir'] = realpath($options['input']);
+	}
+	elseif (getenv('BLOGDOWN_INPUT')) {
+		$app['markdowndir'] = realpath(getenv('BLOGDOWN_INPUT'));
+	}
+	else {
+		$app['markdowndir'] = __DIR__.'/content';
+	}
+
+	// Set theme directory
+	if (isset($options['t'])) {
+		$app['themedir'] = realpath($options['t']);
+	}
+	elseif (isset($options['theme'])) {
+		$app['themedir'] = realpath($options['theme']);
+	}
+	elseif (getenv('BLOGDOWN_THEME')) {
+		$app['themedir'] = realpath(getenv('BLOGDOWN_THEME'));
+	}
+	else {
+		$app['themedir'] = __DIR__.'/theme';
+	}
+
+	// Set output directory
+	if (isset($options['o'])) {
+		$app['htmldir'] = realpath($options['o']);
+	}
+	elseif (isset($options['output'])) {
+		$app['htmldir'] = realpath($options['output']);
+	}
+	elseif (getenv('BLOGDOWN_OUTPUT')) {
+		$app['htmldir'] = realpath(getenv('BLOGDOWN_OUTPUT'));
+	}
+	else {
+		$app['htmldir'] = __DIR__.'/html';
+	}
+});
 
 
 /**
@@ -126,6 +161,8 @@ $app['render.special'] = $app->protect(function() use ($app) {
  * Main
  */
 $app['run'] = $app->protect(function() use ($app) {
+	$app['init']();
+
 	// Create the html directory if it doesn't exist
 	if (!is_dir($app['htmldir'])) {
 		mkdir($app['htmldir']);
