@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h1>{{ item.title }}</h1>
+
+<div class="list-group">
+	{% for listitem in items %}
+		<a href="../{{ item.title|lower }}/{{ listitem.titleshort }}" class="list-group-item">
+			<h4 class="list-group-item-heading">{{ listitem.title }}</h4>
+			<p class="list-group-item-text">{{ listitem.content|striptags[:280]}}{% if listitem.content|striptags|length > 280 %}...{% endif %}</p>
+		</a>
+	{% endfor %}
+</div>
+
+{% endblock %}

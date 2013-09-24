@@ -61,4 +61,18 @@ class Blog {
 	public function categories() {
 		return new DataIterator($this->app, 'category');
 	}
+
+
+	/**
+	 * Archive method
+	 *
+	 * @param string        $type       The archive type
+	 */
+	public function archive($type) {
+		// Typecast
+		$type = (string) $type;
+
+		// Return archive
+		return new Archive($this->app, $this->$type());
+	}
 }

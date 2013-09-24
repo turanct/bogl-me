@@ -32,6 +32,7 @@ class Tag {
 		// Assign
 		$this->app = $app;
 		$this->title = (string) $title;
+		$this->type = str_replace('Blog\\', '', __CLASS__);
 
 		// Get short title
 		$this->titleshort = preg_replace('/[^a-z]+/i', '-', strtolower($this->title));

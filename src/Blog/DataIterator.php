@@ -52,12 +52,13 @@ class DataIterator implements \Iterator {
 		// Set search variables
 		if ($type == 'tag') {
 			$filetypes = array('post');
-			$method = 'tags';
 		}
 		else {
 			$filetypes = array('post', 'page');
-			$method = 'categories';
 		}
+
+		// Set method
+		$method = $this->app['types'][$type];
 
 		// Walk through files, get tags/categories
 		foreach ($filetypes as $filetype) {

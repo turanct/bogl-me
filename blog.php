@@ -48,6 +48,9 @@ $app['blog'] = $app->share(function() use ($app) {
 	return new Blog\Blog($app);
 });
 
+// Type names
+$app['types'] = array('post' => 'posts', 'page' => 'pages', 'tag' => 'tags', 'category' => 'categories');
+
 
 /**
  * Render all types (posts, pages, tags, categories)
@@ -76,6 +79,10 @@ $app['render.types'] = $app->protect(function() use ($app) {
 			// Render the html file
 			file_put_contents($itemDir.'/index.html', $item->render());
 		}
+
+		// Create the directory index file
+		$archive = $app['blog']->archive($type);
+		file_put_contents($typeDir.'/index.html', $archive->render());
 	}
 });
 
@@ -107,6 +114,8 @@ $app['render.special'] = $app->protect(function() use ($app) {
 
 	// Render the 404 page
 	file_put_contents($app['htmldir'].'/404.html', $app['twig']->render('404.html', array('blog' => $app['blog'], 'item' => array('title' => '404'))));
+
+	// Render the RSS feed
 
 	// Copy the assets
 	passthru('cd "'.__DIR__.'" && cp -R "'.realpath($app['themedir']).'/assets" "'.realpath($app['htmldir']).'/"');

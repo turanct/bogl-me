@@ -98,12 +98,19 @@ class Page {
 	 */
 	public function categories() {
 		// Extract
-		$categories = preg_replace('/(.*<\!\-\-\sCATEGORIES\:\s)([\s\d\w\-\,]*)\s\-\->(.*)/ims', '$2', $this->raw);
-		$categories = explode(', ', strtolower($categories));
+		$match = preg_match_all('/<\!\-\-\sCATEGORY\:\s([\s\d\w\-\/]*)\s\-\->/ims', $this->raw, $matches);
+
+		// Did we get matches?
+		if ($match === false) {
+			return array();
+		}
+
+		// Prepare array
+		$categories = array();
 
 		// Walk through categories
-		foreach ($categories as $key => $category) {
-			$categories[$key] = new Category($this->app, $category);
+		foreach ($matches[1] as $key => $category) {
+			$categories[] = new Category($this->app, strtolower($category));
 		}
 
 		// Return

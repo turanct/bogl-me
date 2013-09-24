@@ -2,20 +2,21 @@
 
 {% block content %}
 
-<h1>{{ item.title }}</h1>
+<h1>{{item.type}}: {{ item.title }}</h1>
 
-<h2>Posts</h2>
-<ul>
-	{% for post in posts %}
-		<li>{{ post.date|date("Y-m-d H:i") }} <a href="../../posts/{{ post.titleshort }}">{{ post.title }}</a></li>
-	{% endfor %}
-</ul>
+{% set data = {"posts": posts, "pages": pages} %}
+{% for type in ['posts', 'pages'] %}
+	<h2>{{ type|capitalize }}</h2>
 
-<h2>Pages</h2>
-<ul>
-	{% for page in pages %}
-		<li>{{ page.date|date("Y-m-d H:i") }} <a href="../../pages/{{ page.titleshort }}">{{ page.title }}</a></li>
-	{% endfor %}
-</ul>
+	<div class="list-group">
+		{% for item in attribute(data, type) %}
+			<a href="../../{{ type }}/{{ item.titleshort }}" class="list-group-item">
+				<h4 class="list-group-item-heading">{{ item.title }}</h4>
+				<p class="list-group-item-text">{{ item.content|striptags[:280]}}{% if item.content|striptags|length > 280 %}...{% endif %}</p>
+			</a>
+		{% endfor %}
+	</div>
+
+{% endfor %}
 
 {% endblock %}

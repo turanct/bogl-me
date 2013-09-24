@@ -95,12 +95,19 @@ class Post {
 	 */
 	public function tags() {
 		// Extract
-		$tags = preg_replace('/(.*<\!\-\-\sTAGS\:\s)([\s\d\w\-\,]*)\s\-\->(.*)/ims', '$2', $this->raw);
-		$tags = explode(', ', strtolower($tags));
+		$match = preg_match_all('/<\!\-\-\sTAG\:\s([\s\d\w\-\/]*)\s\-\->/ims', $this->raw, $matches);
+
+		// Did we get matches?
+		if ($match === false) {
+			return array();
+		}
+
+		// Prepare array
+		$tags = array();
 
 		// Walk through tags
-		foreach ($tags as $key => $tag) {
-			$tags[$key] = new Tag($this->app, $tag);
+		foreach ($matches[1] as $key => $tag) {
+			$tags[] = new Tag($this->app, strtolower($tag));
 		}
 
 		// Return
@@ -113,12 +120,19 @@ class Post {
 	 */
 	public function categories() {
 		// Extract
-		$categories = preg_replace('/(.*<\!\-\-\sCATEGORIES\:\s)([\s\d\w\-\,]*)\s\-\->(.*)/ims', '$2', $this->raw);
-		$categories = explode(', ', strtolower($categories));
+		$match = preg_match_all('/<\!\-\-\sCATEGORY\:\s([\s\d\w\-\/]*)\s\-\->/ims', $this->raw, $matches);
+
+		// Did we get matches?
+		if ($match === false) {
+			return array();
+		}
+
+		// Prepare array
+		$categories = array();
 
 		// Walk through categories
-		foreach ($categories as $key => $category) {
-			$categories[$key] = new Category($this->app, $category);
+		foreach ($matches[1] as $key => $category) {
+			$categories[] = new Category($this->app, strtolower($category));
 		}
 
 		// Return
