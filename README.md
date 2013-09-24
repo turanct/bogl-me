@@ -30,11 +30,11 @@ Make sure that if you provide a value, you also make sure the necessary files ar
 
 
 
-### The `text` directory
+### The `content` directory
 
-The directory in which the `config.json` file resides is called the `text` directory. This is where your blog gets written. The directory structure looks like this:
+The directory in which the `config.json` file resides is called the `content` directory. This is where your blog gets written. The directory structure looks like this:
 
-	/text
+	/content
 		/pages
 			/page1.md
 			/page2.md
@@ -56,6 +56,7 @@ This is where you define what your blog looks like. You can use html, css & java
 * `index.html` This file contains a static index page for your site. It should be present, even if you don't use a static index page, as it is used as a fallback.
 * `post.html` This file contains the template for blog posts. It will also be used as a fallback for pages.
 * `category.html` This file contains the template for category overviews. It will also be used as a fallback for tags.
+* `archive.html` This file contains the template for type overviews.
 * `404.html` The 404 page for your blog.
 * `assets` directory. This directory should be present, you can put `.css` and `.js` files here, they will be copied over to the html directory when we render our blog.
 
@@ -69,18 +70,19 @@ These are optional
 Creating posts and pages
 ----------------------------------------
 
-1. To create a post or a page, just create a new Markdown document in the appropriate subdirectory of your `text` directory. The filename of the post should not contain spaces or uppercase letters, only `a-z` and hyphen(`-`) are allowed. The filename will be used as the *short title* for this post or page.
+1. To create a post or a page, just create a new Markdown document in the appropriate subdirectory of your `content` directory. The filename of the post should not contain spaces or uppercase letters, only `a-z` and hyphen(`-`) are allowed. The filename will be used as the *short title* for this post or page.
 2. Your post should start with a Markdown header one. If you don't know how to do that, check out the [Markdown Spec](http://daringfireball.net/projects/markdown/). The first header one will be used as post or page title by Blog.
 3. You can now write the post or page contents in regular markdown.
 4. At the bottom of your page or post, attach some specifications about that page or post:
 
 '
 	<!-- DATE: 2013-09-21 13:36 -->
-	<!-- TAGS: welcome, intro -->
-	<!-- CATEGORIES: intro -->
+	<!-- TAG: welcome -->
+	<!-- TAG: intro -->
+	<!-- CATEGORY: intro -->
 
 DATE should be in the `YYYY-MM-DD H:M` format, and use 24-hour times.
 
-TAGS & CATEGORIES can have multiple values, separated from each other by a comma and a space (`, `)
+There can be multiple TAG & CATEGORY comments, to attach multiple tags or categories to your posts.
 
-*Please note that pages cannot have the DATE or TAGS entries, only the CATEGORIES entries.*
+*Please note that pages cannot have the DATE or TAG entries, only the CATEGORY entries.*
