@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<rss version="2.0">
+<channel>
+	<title>{{ blog.title }}</title>
+	<description>{{ blog.title }}'s RSS feed</description>
+	<link>{{ blog.url }}</link>
+	<lastBuildDate>{{ "now"|date("D, d M Y H:i:s O") }} </lastBuildDate>
+	<pubDate>{{ "now"|date("D, d M Y H:i:s O") }} </pubDate>
+	<ttl>1800</ttl>
+
+{% for item in items %}
+	<item>
+		<title>{{ item.title }}</title>
+		<description>{{ item.content|striptags }}</description>
+		<link>{{ blog.url }}/posts/{{ item.titleshort }}</link>
+		<guid>{{ item.titleshort }}</guid>
+		<pubDate>{{ item.date|date("D, d M Y H:i:s O") }} </pubDate>
+	</item>
+{% endfor %}
+
+</channel>
+</rss>

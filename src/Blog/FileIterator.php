@@ -50,7 +50,7 @@ class FileIterator implements \Iterator {
 
 		// List the directory
 		if (empty($keys)) {
-			$this->keys = glob($this->app['basedir'].'/markdown/'.$this->type.'s/*.md');
+			$this->keys = glob($this->app['markdowndir'].'/'.$this->type.'s/*.md');
 		}
 		else {
 			$this->keys = (array) $keys;

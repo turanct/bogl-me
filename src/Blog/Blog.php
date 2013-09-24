@@ -75,4 +75,13 @@ class Blog {
 		// Return archive
 		return new Archive($this->app, $this->$type());
 	}
+
+
+	/**
+	 * Rss method
+	 */
+	public function rss() {
+		// Return archive
+		return new Rss($this->app, $this->posts());
+	}
 }

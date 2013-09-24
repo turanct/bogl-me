@@ -1,5 +1,7 @@
 {
 	"title": "Blog, the simple static blog generator",
 	"titleshort": "Blog",
+	"url": "",
+	"rss": true,
 	"home": "static"
 }

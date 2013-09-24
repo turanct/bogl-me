@@ -134,7 +134,7 @@ $app['render.special'] = $app->protect(function() use ($app) {
 			break;
 
 		case 'post':
-			$posts = new Blog\FileIterator($app, 'post');
+			$posts = $app['blog']->posts();
 			$posts->rewind();
 			$post = $posts->current();
 			$rendered = $post->render();
@@ -151,6 +151,10 @@ $app['render.special'] = $app->protect(function() use ($app) {
 	file_put_contents($app['htmldir'].'/404.html', $app['twig']->render('404.html', array('blog' => $app['blog'], 'item' => array('title' => '404'))));
 
 	// Render the RSS feed
+	if ($app['blog']->rss === true) {
+		$rss = $app['blog']->rss();
+		file_put_contents($app['htmldir'].'/feed.xml', $rss->render());
+	}
 
 	// Copy the assets
 	passthru('cd "'.__DIR__.'" && cp -R "'.realpath($app['themedir']).'/assets" "'.realpath($app['htmldir']).'/"');

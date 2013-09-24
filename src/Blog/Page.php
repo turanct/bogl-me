@@ -58,7 +58,7 @@ class Page {
 	 */
 	public function init() {
 		// Get raw file contents
-		$this->raw = @file_get_contents($this->app['basedir'].'/markdown/pages/'.$this->filename.'.md');
+		$this->raw = @file_get_contents($this->app['markdowndir'].'/pages/'.$this->filename.'.md');
 
 		// Get title
 		$html = $this->content();
