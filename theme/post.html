@@ -6,21 +6,30 @@
 	{{ item.content|raw }}
 </div>
 
-<div class="post-meta meta">
-	<div class="post-date">
-		DATE: {{ item.date|date("Y-m-d H:i") }}
+<div class="post-meta meta panel panel-default">
+	<div class="panel-heading">
+		<h3 class="panel-title">info</h3>
 	</div>
-	<div class="post-tags">
-		TAGS: 
-		{% for tag in item.tags %}
-			<a href="../../tags/{{ tag.titleshort }}/" class="tag">{{ tag.title }}</a> 
-		{% endfor %}
-	</div>
-	<div class="post-categories">
-		CATEGORIES: 
-		{% for category in item.categories %}
-			<a href="../../categories/{{ category.titleshort }}/" class="category">{{ category.title }}</a> 
-		{% endfor %}
+	<div class="panel-body">
+		<div class="post-date">
+			<i class="glyphicon glyphicon-time"></i> {{ item.date|date("Y-m-d H:i") }}
+		</div>
+
+		{% if item.tags %}
+		<div class="post-tags">
+			{% for tag in item.tags %}
+				<a href="../../tags/{{ tag.titleshort }}/" class="tag" title="Tag: {{ tag.title }}"><i class="glyphicon glyphicon-tag icon-white"></i> {{ tag.title }}</a> 
+			{% endfor %}
+		</div>
+		{% endif %}
+
+		{% if item.categories %}
+		<div class="post-categories">
+			{% for category in item.categories %}
+				<a href="../../categories/{{ category.titleshort }}/" class="category" title="Category: {{ category.title }}"><i class="glyphicon glyphicon-bookmark icon-white"></i> {{ category.title }}</a> 
+			{% endfor %}
+		</div>
+		{% endif %}
 	</div>
 </div>
 

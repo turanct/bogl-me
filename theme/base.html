@@ -14,7 +14,7 @@
 	<script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
 
 	<!-- Custom -->
-	<link rel="stylesheet" href="assets/style.css">
+	<link rel="stylesheet" href="{{ blog.url }}/assets/style.css">
 </head>
 
 
@@ -31,7 +31,7 @@
 					<ul class="nav navbar-nav">
 						<li><a href="{{ blog.url }}/posts/">Archive</a></li>
 						{% for page in blog.pages %}
-							<li><a href="{{ blog.url }}/pages/{{ page.titleshort }}">{{ page.titleshort }}</a></li>
+							<li><a href="{{ blog.url }}/pages/{{ page.titleshort }}">{{ page.title }}</a></li>
 						{% endfor %}
 					</ul>
 				</div>
