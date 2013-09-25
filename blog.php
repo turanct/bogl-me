@@ -158,6 +158,9 @@ $app['render.special'] = $app->protect(function() use ($app) {
 
 	// Copy the assets
 	passthru('cd "'.__DIR__.'" && cp -R "'.realpath($app['themedir']).'/assets" "'.realpath($app['htmldir']).'/"');
+
+	// Copy the htaccess file
+	passthru('cd "'.__DIR__.'" && cp -R "'.realpath($app['themedir']).'/.htaccess" "'.realpath($app['htmldir']).'/"');
 });
 
 
