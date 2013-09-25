@@ -98,7 +98,7 @@ class Page {
 	 */
 	public function categories() {
 		// Extract
-		$match = preg_match_all('/<\!\-\-\sCATEGORY\:\s([\s\d\w\-\/]*)\s\-\->/ims', $this->raw, $matches);
+		$match = preg_match_all('/<\!\-\-\sCATEGORY\:\s([\s\d\w\-\/\.\$]*)\s\-\->/ims', $this->raw, $matches);
 
 		// Did we get matches?
 		if ($match === false) {
