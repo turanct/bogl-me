@@ -1,12 +1,24 @@
-Blog
+Blogdown
 ========================================
 
 
-Blog is a simple static blog generator in php. It uses plain Markdown files as posts and pages. Tags and Categories are generated.
+Blogdown is a simple static blog generator in php. It uses plain Markdown files as posts and pages. Tags and Categories are generated. Themes can be applied in a simple manner. The result is a blog with only statically serverd pages (html, css, javascript).
 
 
 
-Configuration
+1. Features
+----------------------------------------
+
+* Write your content in Markdown, on your local computer.
+* Create your own theme using html, css and javascript, using the [Twig](http://twig.sensiolabs.org/documentation) template language.
+* Get static html pages as an end-result, never panic about server load again!
+* Version tracking of your posts is easy, just make your `markdown` directory a git repository.
+* Deploy your blog with git
+* ...
+
+
+
+2. Configuration
 ----------------------------------------
 
 ### The `config.json` file
@@ -14,17 +26,23 @@ Configuration
 	{
 		"title": "Blog, the simple static blog generator",
 		"titleshort": "Blog",
+		"url": "http://blogdown.dev",
+		"rss": false,
 		"home": "last-post"
 	}
 
 The `title` and `titleshort` values are self-explanatory.
+
+The `url` value is the base url of your blog. Don't add a trailing slash.
+
+The `rss` value defines if an rss feed will be generated. For this to work, you'll need an `rss.xml` template present in your theme directory.
 
 The `home` value defines what your homepage should look like. Possible values:
 
 * `static` This will take the 'index.html' template from the theme directory and render it.
 * `page` This will use the 'index.md' page file, and render it using the 'page.html' template.
 * `post` This will render the last post using the post.html template.
-* `posts` This will render all posts using the posts.html template file.
+* `posts` This will render all posts using the posts.html template file. **To be implemented**
 
 Make sure that if you provide a value, you also make sure the necessary files are present. If not, we'll show the static front-page.
 
@@ -45,7 +63,7 @@ The directory in which the `config.json` file resides is called the `content` di
 
 		/config.json
 
-As you can see, you can just create pages and posts in the appropriate directories. For all text, we'll use Markdown files with filenames ending in `.md`.
+As you can see, you can just create pages and posts in the appropriate directories. For all text, we'll use Markdown files with filenames ending in `.md`. You can read more about this in chapter 2 'Creating posts and pages' of this README.
 
 
 
@@ -60,19 +78,21 @@ This is where you define what your blog looks like. You can use html, css & java
 * `404.html` The 404 page for your blog.
 * `assets` directory. This directory should be present, you can put `.css` and `.js` files here, they will be copied over to the html directory when we render our blog.
 
-These are optional
+These are optional:
 
 * `page.html` This file contains the template for pages.
 * `tag.html` This file contains the template for tag overviews.
+* `posts.html` This file contains the template for the home page 'posts' mode.
+* `rss.xml` This file contains the template for an rss feed.
 
 
 
-Creating posts and pages
+3. Creating posts and pages
 ----------------------------------------
 
 1. To create a post or a page, just create a new Markdown document in the appropriate subdirectory of your `content` directory. The filename of the post should not contain spaces or uppercase letters, only `a-z` and hyphen(`-`) are allowed. The filename will be used as the *short title* for this post or page.
 2. Your post should start with a Markdown header one. If you don't know how to do that, check out the [Markdown Spec](http://daringfireball.net/projects/markdown/). The first header one will be used as post or page title by Blog.
-3. You can now write the post or page contents in regular markdown.
+3. You can now write the post or page contents in regular Markdown.
 4. At the bottom of your page or post, attach some specifications about that page or post:
 
 '
@@ -81,8 +101,48 @@ Creating posts and pages
 	<!-- TAG: intro -->
 	<!-- CATEGORY: intro -->
 
-DATE should be in the `YYYY-MM-DD H:M` format, and use 24-hour times.
+DATE should be in the `YYYY-MM-DD HH:MM` format, and use 24-hour times.
 
 There can be multiple TAG & CATEGORY comments, to attach multiple tags or categories to your posts.
 
 *Please note that pages cannot have the DATE or TAG entries, only the CATEGORY entries.*
+
+
+
+4. Compiling your blog
+----------------------------------------
+
+Blogdown has to know three paths to compile your blog:
+
+1. The `content` directory
+2. The `theme` directory
+3. The `html` directory
+
+
+### Use long command line arguments
+
+	php blog.php --input={path to content directory} --theme={path to theme directory} --output={path to html directory}
+
+### Use short command line arguments
+
+	php blog.php -i={path to content directory} -t={path to theme directory} -o={path to html directory}
+
+### Use environment variables ($ENV)
+
+#### Using `.bashrc`
+
+You can use your `.bashrc` file to set these variables:
+	export BLOGDOWN_INPUT={path to content directory}
+	export BLOGDOWN_THEME={path to theme directory}
+	export BLOGDOWN_OUTPUT={path to html directory}
+
+Then, run the script without arguments:
+
+	php blog.php
+
+
+
+5. Thanks
+----------------------------------------
+
+Thanks to [Jenne De Bleser](https://bitbucket.org/jennedebleser) for the awesome name for this project, *Blogdown*
