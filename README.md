@@ -24,8 +24,8 @@ Blogdown is a simple static blog generator in php. It uses plain Markdown files 
 ### The `config.json` file
 
 	{
-		"title": "Blog, the simple static blog generator",
-		"titleshort": "Blog",
+		"title": "Blogdown, the simple static blog generator",
+		"titleshort": "Blogdown",
 		"url": "http://blogdown.dev",
 		"rss": false,
 		"home": "last-post"
@@ -114,9 +114,9 @@ There can be multiple TAG & CATEGORY comments, to attach multiple tags or catego
 
 Blogdown has to know three paths to compile your blog:
 
-1. The `content` directory
-2. The `theme` directory
-3. The `html` directory
+1. The `content` directory's path
+2. The `theme` directory's path
+3. The `html` directory's path
 
 
 ### Use long command line arguments
@@ -142,7 +142,23 @@ Then, run the script without arguments:
 
 
 
-5. Thanks
+5. Installing Blogdown on your system
+----------------------------------------
+
+Assuming you're on Mac OSX or GNU/Linux with `git`, `php` and `curl` installed:
+
+	BD_PWD=`pwd` && git clone https://github.com/turanct/blogdown.git /usr/local/blogdown && cd /usr/local/blogdown && curl -sS https://getcomposer.org/installer | php && ln -s /usr/local/blogdown/blogdown.php /usr/local/bin/blogdown && cd $BD_PWD
+
+
+
+6. License
+----------------------------------------
+
+Blogdown is licensed under the *Modified BSD License*
+
+
+
+7. Thanks
 ----------------------------------------
 
 Thanks to [Jenne De Bleser](https://bitbucket.org/jennedebleser) for the awesome name for this project, *Blogdown*
