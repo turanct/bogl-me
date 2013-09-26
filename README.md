@@ -95,7 +95,6 @@ These are optional:
 3. You can now write the post or page contents in regular Markdown.
 4. At the bottom of your page or post, attach some specifications about that page or post:
 
-'
 	<!-- DATE: 2013-09-21 13:36 -->
 	<!-- TAG: welcome -->
 	<!-- TAG: intro -->
@@ -119,15 +118,15 @@ Bogl has to know three paths to compile your blog:
 3. The `html` directory's path
 
 
-### Use long command line arguments
+### Using long command line arguments
 
 	bogl --input={path to content directory} --theme={path to theme directory} --output={path to html directory}
 
-### Use short command line arguments
+### Using short command line arguments
 
 	bogl -i={path to content directory} -t={path to theme directory} -o={path to html directory}
 
-### Use environment variables ($ENV)
+### Using environment variables ($ENV)
 
 #### Using `.bashrc`
 
