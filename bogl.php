@@ -51,8 +51,8 @@ $app['init'] = $app->protect(function() use ($app) {
 	elseif (isset($options['input'])) {
 		$app['markdowndir'] = realpath($options['input']);
 	}
-	elseif (getenv('BLOGDOWN_INPUT')) {
-		$app['markdowndir'] = realpath(getenv('BLOGDOWN_INPUT'));
+	elseif (getenv('BOGL_INPUT')) {
+		$app['markdowndir'] = realpath(getenv('BOGL_INPUT'));
 	}
 	else {
 		$app['markdowndir'] = __DIR__.'/content';
@@ -65,8 +65,8 @@ $app['init'] = $app->protect(function() use ($app) {
 	elseif (isset($options['theme'])) {
 		$app['themedir'] = realpath($options['theme']);
 	}
-	elseif (getenv('BLOGDOWN_THEME')) {
-		$app['themedir'] = realpath(getenv('BLOGDOWN_THEME'));
+	elseif (getenv('BOGL_THEME')) {
+		$app['themedir'] = realpath(getenv('BOGL_THEME'));
 	}
 	else {
 		$app['themedir'] = __DIR__.'/theme';
@@ -79,8 +79,8 @@ $app['init'] = $app->protect(function() use ($app) {
 	elseif (isset($options['output'])) {
 		$app['htmldir'] = realpath($options['output']);
 	}
-	elseif (getenv('BLOGDOWN_OUTPUT')) {
-		$app['htmldir'] = realpath(getenv('BLOGDOWN_OUTPUT'));
+	elseif (getenv('BOGL_OUTPUT')) {
+		$app['htmldir'] = realpath(getenv('BOGL_OUTPUT'));
 	}
 	else {
 		$app['htmldir'] = __DIR__.'/html';

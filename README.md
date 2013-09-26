@@ -1,8 +1,8 @@
-Blogdown
+Bogl
 ========================================
 
 
-Blogdown is a simple static blog generator in php. It uses plain Markdown files as posts and pages. Tags and Categories are generated. Themes can be applied in a simple manner. The result is a blog with only statically serverd pages (html, css, javascript).
+Bogl is a simple static blog generator in php. It uses plain Markdown files as posts and pages. Tags and Categories are generated. Themes can be applied in a simple manner. The result is a blog with only statically serverd pages (html, css, javascript).
 
 
 
@@ -24,9 +24,9 @@ Blogdown is a simple static blog generator in php. It uses plain Markdown files 
 ### The `config.json` file
 
 	{
-		"title": "Blogdown, the simple static blog generator",
-		"titleshort": "Blogdown",
-		"url": "http://blogdown.dev",
+		"title": "Bogl, the simple static blog generator",
+		"titleshort": "Bogl",
+		"url": "http://bogl.dev",
 		"rss": false,
 		"home": "last-post"
 	}
@@ -112,7 +112,7 @@ There can be multiple TAG & CATEGORY comments, to attach multiple tags or catego
 4. Compiling your blog
 ----------------------------------------
 
-Blogdown has to know three paths to compile your blog:
+Bogl has to know three paths to compile your blog:
 
 1. The `content` directory's path
 2. The `theme` directory's path
@@ -121,44 +121,38 @@ Blogdown has to know three paths to compile your blog:
 
 ### Use long command line arguments
 
-	php blog.php --input={path to content directory} --theme={path to theme directory} --output={path to html directory}
+	bogl --input={path to content directory} --theme={path to theme directory} --output={path to html directory}
 
 ### Use short command line arguments
 
-	php blog.php -i={path to content directory} -t={path to theme directory} -o={path to html directory}
+	bogl -i={path to content directory} -t={path to theme directory} -o={path to html directory}
 
 ### Use environment variables ($ENV)
 
 #### Using `.bashrc`
 
 You can use your `.bashrc` file to set these variables:
-	export BLOGDOWN_INPUT={path to content directory}
-	export BLOGDOWN_THEME={path to theme directory}
-	export BLOGDOWN_OUTPUT={path to html directory}
 
-Then, run the script without arguments:
+	export BOGL_INPUT={path to content directory}
+	export BOGL_THEME={path to theme directory}
+	export BOGL_OUTPUT={path to html directory}
 
-	php blog.php
+Then, run Bogl without arguments:
+
+	bogl
 
 
 
-5. Installing Blogdown on your system
+5. Installing Bogl on your system
 ----------------------------------------
 
 Assuming you're on Mac OSX or GNU/Linux with `git`, `php` and `curl` installed:
 
-	BD_PWD=`pwd` && git clone https://github.com/turanct/blogdown.git /usr/local/blogdown && cd /usr/local/blogdown && curl -sS https://getcomposer.org/installer | php && ln -s /usr/local/blogdown/blogdown.php /usr/local/bin/blogdown && cd $BD_PWD
+	BOGL_PWD=`pwd` && git clone https://github.com/turanct/bogl-me.git /usr/local/bogl && cd /usr/local/bogl && curl -sS https://getcomposer.org/installer | php && ln -s /usr/local/bogl/bogl.php /usr/local/bin/bogl && cd $BOGL_PWD
 
 
 
 6. License
 ----------------------------------------
 
-Blogdown is licensed under the *Modified BSD License*
-
-
-
-7. Thanks
-----------------------------------------
-
-Thanks to [Jenne De Bleser](https://bitbucket.org/jennedebleser) for the awesome name for this project, *Blogdown*
+Bogl-me is licensed under the *Modified BSD License*

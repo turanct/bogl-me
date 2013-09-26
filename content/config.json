@@ -1,7 +1,7 @@
 {
-	"title": "Blogdown, the simple static markdown blog",
-	"titleshort": "Blogdown",
-	"url": "http://blogdown.dev",
+	"title": "Bogl, the simple static markdown blog",
+	"titleshort": "Bogl",
+	"url": "http://bogl.dev",
 	"rss": true,
 	"home": "static"
 }
