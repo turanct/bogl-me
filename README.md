@@ -96,10 +96,10 @@ These are optional:
 4. At the bottom of your page or post, attach some specifications about that page or post:
 
 ```
-	<!-- DATE: 2013-09-21 13:36 -->
-	<!-- TAG: welcome -->
-	<!-- TAG: intro -->
-	<!-- CATEGORY: intro -->
+<!-- DATE: 2013-09-21 13:36 -->
+<!-- TAG: welcome -->
+<!-- TAG: intro -->
+<!-- CATEGORY: intro -->
 ```
 
 DATE should be in the `YYYY-MM-DD HH:MM` format, and use 24-hour times.
