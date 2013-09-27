@@ -38,6 +38,35 @@ $app['types'] = array('post' => 'posts', 'page' => 'pages', 'tag' => 'tags', 'ca
 
 
 /**
+ * Color method
+ */
+$app['output'] = $app->protect(function($string, $mode = 'normal') use ($app) {
+	switch ($mode) {
+		case 'welcome':
+			echo "\033[1;31m".$string."\033[0m\n";
+			break;
+
+		case 'title':
+			echo "\n--> \033[0;32m".$string."\033[0m\n";
+			break;
+
+		case 'notice':
+			echo "\033[0;36m".$string."\033[0m\n";
+			break;
+
+		case 'error':
+			echo "\033[0;31m".$string."\033[0m\n";
+			break;
+
+		case 'normal':
+		default:
+			echo $string."\n";
+			break;
+	}
+});
+
+
+/**
  * Initialize the application
  */
 $app['init'] = $app->protect(function() use ($app) {
@@ -94,6 +123,9 @@ $app['init'] = $app->protect(function() use ($app) {
 $app['render.types'] = $app->protect(function() use ($app) {
 	// Walk through data types
 	foreach (array('posts', 'pages', 'tags', 'categories') as $type) {
+		// Output
+		$app['output']('Rendering '.$type.'...', 'title');
+
 		// Set directory name
 		$typeDir = $app['htmldir'].'/'.$type;
 
@@ -104,6 +136,9 @@ $app['render.types'] = $app->protect(function() use ($app) {
 
 		// Walk through items of this type
 		foreach ($app['blog']->$type() as $item) {
+			// Output
+			$app['output']($item->title);
+
 			// Set directory name
 			$itemDir = $typeDir.'/'.$item->titleshort;
 
@@ -116,6 +151,9 @@ $app['render.types'] = $app->protect(function() use ($app) {
 			file_put_contents($itemDir.'/index.html', $item->render());
 		}
 
+		// Output
+		$app['output']('Rendering index file...', 'notice');
+
 		// Create the directory index file
 		$archive = $app['blog']->archive($type);
 		file_put_contents($typeDir.'/index.html', $archive->render());
@@ -127,6 +165,9 @@ $app['render.types'] = $app->protect(function() use ($app) {
  * Render the special pages and assets
  */
 $app['render.special'] = $app->protect(function() use ($app) {
+	// Output
+	$app['output']('Rendering home page...', 'title');
+
 	// Render the home page
 	switch ($app['blog']->home) {
 		case 'page':
@@ -148,8 +189,14 @@ $app['render.special'] = $app->protect(function() use ($app) {
 	}
 	file_put_contents($app['htmldir'].'/index.html', $rendered);
 
+	// Output
+	$app['output']('Rendering 404 page...', 'title');
+
 	// Render the 404 page
 	file_put_contents($app['htmldir'].'/404.html', $app['twig']->render('404.html', array('blog' => $app['blog'], 'item' => array('title' => '404'))));
+
+	// Output
+	$app['output']('Rendering RSS feed...', 'title');
 
 	// Render the RSS feed
 	if ($app['blog']->rss === true) {
@@ -157,8 +204,14 @@ $app['render.special'] = $app->protect(function() use ($app) {
 		file_put_contents($app['htmldir'].'/feed.xml', $rss->render());
 	}
 
+	// Output
+	$app['output']('Copying assets...', 'title');
+
 	// Copy the assets
 	passthru('cd "'.__DIR__.'" && cp -R "'.realpath($app['themedir']).'/assets" "'.realpath($app['htmldir']).'/"');
+
+	// Output
+	$app['output']('Copying .htacess file...', 'title');
 
 	// Copy the htaccess file
 	passthru('cd "'.__DIR__.'" && cp -R "'.realpath($app['themedir']).'/.htaccess" "'.realpath($app['htmldir']).'/"');
@@ -169,6 +222,10 @@ $app['render.special'] = $app->protect(function() use ($app) {
  * Main
  */
 $app['run'] = $app->protect(function() use ($app) {
+	// Output welcome message
+	$app['output']('Bogl', 'welcome');
+
+	// Initialize
 	$app['init']();
 
 	// Create the html directory if it doesn't exist
