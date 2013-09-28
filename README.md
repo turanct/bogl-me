@@ -14,6 +14,7 @@ Bogl is a simple static blog generator in php. It uses plain Markdown files as p
 * Get static html pages as an end-result, never panic about server load again!
 * Version tracking of your posts is easy, just make your `markdown` directory a git repository.
 * Deploy your blog with git
+* Clean URLs
 * ...
 
 
