@@ -86,8 +86,8 @@ class Page {
 	 */
 	public function description() {
 		// Strip tags, title, and trim
-		$description = strip_tags($this->content());
-		$description = str_replace($this->title, '', $description);
+		$description = str_replace('<h1>'.$this->title.'</h1>', '', $this->content());
+		$description = strip_tags($description);
 		$ellipsis = (strlen($description)>280) ? '...' : '';
 		$description = substr($description, 0, 280).$ellipsis;
 
