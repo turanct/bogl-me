@@ -215,6 +215,12 @@ $app['render.special'] = $app->protect(function() use ($app) {
 
 	// Copy the htaccess file
 	passthru('cd "'.__DIR__.'" && cp -R "'.realpath($app['themedir']).'/.htaccess" "'.realpath($app['htmldir']).'/"');
+
+	// Output
+	$app['output']('Creating .nojekyll file...', 'title');
+
+	// Create a .nojekyll file, to make all assets work on github pages
+	passthru('touch "'.realpath($app['htmldir']).'/.nojekyll"');
 });
 
 
