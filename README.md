@@ -2,7 +2,7 @@ Bogl
 ========================================
 
 
-Bogl is a simple static blog generator in php. It uses plain Markdown files as posts and pages. Tags and Categories are generated. Themes can be applied in a simple manner. The result is a blog with only statically serverd pages (html, css, javascript).
+Bogl is a simple static blog generator in php. It uses plain Markdown files as posts and pages. Tags and Categories are generated. Themes can be applied in a simple manner. The result is a blog with only statically served pages (html, css, javascript).
 
 
 

@@ -7,4 +7,24 @@
 	<p>This is not the page you're looking for...</p>
 </div>
 
+<div class="lookingfor">
+	<h3>Were you looking for one of these?</h3>
+
+	{% set data = {"posts": blog.posts, "pages": blog.pages} %}
+	{% for type in ['posts', 'pages'] %}
+		{% if attribute(data, type) %}
+		<h2>{{ type|capitalize }}</h2>
+
+		<div class="list-group">
+			{% for item in attribute(data, type) %}
+				<a href="{{ blog.url }}/{{ type }}/{{ item.titleshort }}" class="list-group-item">
+					<h4 class="list-group-item-heading">{{ item.title }}</h4>
+				</a>
+			{% endfor %}
+		</div>
+		{% endif %}
+
+	{% endfor %}
+</div>
+
 {% endblock %}

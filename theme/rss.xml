@@ -11,7 +11,7 @@
 {% for item in items %}
 	<item>
 		<title>{{ item.title }}</title>
-		<description>{{ item.content|striptags }}</description>
+		<description>{{ item.description }}</description>
 		<link>{{ blog.url }}/posts/{{ item.titleshort }}</link>
 		<guid>{{ item.titleshort }}</guid>
 		<pubDate>{{ item.date|date("D, d M Y H:i:s O") }} </pubDate>
