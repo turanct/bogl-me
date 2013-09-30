@@ -75,7 +75,7 @@ This is where you define what your blog looks like. You can use html, css & java
 * `index.html` This file contains a static index page for your site. It should be present, even if you don't use a static index page, as it is used as a fallback.
 * `post.html` This file contains the template for blog posts. It will also be used as a fallback for pages.
 * `category.html` This file contains the template for category overviews. It will also be used as a fallback for tags.
-* `archive.html` This file contains the template for type overviews.
+* `archive.html` This file contains the template for type overviews. It will also be used as a fallback for all `archive-{type}.html` files.
 * `404.html` The 404 page for your blog.
 * `assets` directory. This directory should be present, you can put `.css` and `.js` files here, they will be copied over to the html directory when we render our blog.
 
@@ -84,6 +84,10 @@ These are optional:
 * `page.html` This file contains the template for pages.
 * `tag.html` This file contains the template for tag overviews.
 * `posts.html` This file contains the template for the home page 'posts' mode.
+* `archive-posts.html` This file contains the template for the overview of all posts.
+* `archive-pages.html` This file contains the template for the overview of all pages.
+* `archive-tags.html` This file contains the template for the overview of all tags.
+* `archive-categories.html` This file contains the template for the overview of all categories.
 * `rss.xml` This file contains the template for an rss feed.
 
 

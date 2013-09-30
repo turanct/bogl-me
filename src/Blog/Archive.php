@@ -43,7 +43,10 @@ class Archive {
 	 * Render method
 	 */
 	public function render() {
+		// Get template
+		$template = (file_exists($this->app['themedir'].'/archive-'.strtolower($this->name).'.html')) ? 'archive-'.strtolower($this->name).'.html' : 'archive.html';
+
 		// Get rendered html from twig
-		return $this->app['twig']->render('archive.html', array('blog' => $this->app['blog'], 'item' => array('title' => $this->name), 'items' => $this->items));
+		return $this->app['twig']->render($template, array('blog' => $this->app['blog'], 'item' => array('title' => $this->name), 'items' => $this->items));
 	}
 }
