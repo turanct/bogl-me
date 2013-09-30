@@ -82,6 +82,21 @@ class Post {
 
 
 	/**
+	 * Description method
+	 */
+	public function description() {
+		// Strip tags, title, and trim
+		$description = strip_tags($this->content());
+		$description = str_replace($this->title, '', $description);
+		$ellipsis = (strlen($description)>280) ? '...' : '';
+		$description = substr($description, 0, 280).$ellipsis;
+
+		// Return
+		return $description;
+	}
+
+
+	/**
 	 * Render method
 	 */
 	public function render() {
