@@ -63,6 +63,11 @@ class Category {
 			$filenames[] = $postfile;
 		}
 
+		// Empty list?
+		if (empty($filenames)) {
+			return array();
+		}
+
 		// Return FileIterator with post list
 		return new FileIterator($this->app, 'post', 'ASC', $filenames);
 	}
@@ -81,6 +86,11 @@ class Category {
 		// Walk through iterator values
 		foreach ($DataIterator->entries[$this->title]['pages'] as $postfile) {
 			$filenames[] = $postfile;
+		}
+
+		// Empty list?
+		if (empty($filenames)) {
+			return array();
 		}
 
 		// Return FileIterator with post list

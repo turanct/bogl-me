@@ -66,6 +66,11 @@ class Tag {
 			$filenames[] = $postfile;
 		}
 
+		// Empty list?
+		if (empty($filenames)) {
+			return array();
+		}
+
 		// Return FileIterator with post list
 		return new FileIterator($this->app, 'post', 'ASC', $filenames);
 	}
