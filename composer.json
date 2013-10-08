@@ -2,7 +2,7 @@
 	"name": "turanct/blog",
 	"description": "Simple static blog system",
 	"type": "application",
-	"homepage": "http://bitbucket.org/turanct/blog",
+	"homepage": "http://bitbucket.org/turanct/bogl-me",
 	"license": "MIT",
 	"authors": [
 		{
