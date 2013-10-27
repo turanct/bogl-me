@@ -238,7 +238,8 @@ a.category:hover {
 
 .post-date,
 .post-tags,
-.post-categories {
+.post-categories,
+.page-categories {
 	padding: 20px 0;
 }
 
