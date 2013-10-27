@@ -8,10 +8,8 @@
 	<!-- RSS -->
 	<link rel="alternate" type="application/rss+xml" title="{{ blog.title }}" href="{{ blog.url }}/feed.xml" />
 
-	<!-- Bootstrap -->
-	<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css">
-	<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-theme.min.css">
-	<script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+	<!-- Bootstrap glyphicons-->
+	<link rel="stylesheet" href="{{ blog.url }}/assets/bootstrap.css">
 
 	<!-- Custom -->
 	<link rel="stylesheet" href="{{ blog.url }}/assets/style.css">
@@ -22,6 +20,12 @@
 	<div class="wrapper">
 
 		<!-- Header Section -->
+		<div class="header">
+			<h1>{{ blog.title }}</h1>
+		</div>
+
+
+		<!-- Nav Section -->
 		<div class="navbar navbar-default navbar-static-top">
 			<div class="container">
 				<div class="navbar-header">

@@ -7,8 +7,7 @@
 <div class="list-group">
 	{% for listitem in items %}
 		<a href="{{ blog.url }}/{{ item.title|lower }}/{{ listitem.titleshort }}" class="list-group-item">
-			<h4 class="list-group-item-heading">{{ listitem.title }}</h4>
-			<p class="list-group-item-text">{{ listitem.description }}</p>
+			<h4 class="list-group-item-heading"><i class="glyphicon glyphicon-bookmark"></i> {{ listitem.title }}</h4>
 		</a>
 	{% endfor %}
 </div>

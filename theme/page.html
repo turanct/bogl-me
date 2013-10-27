@@ -7,14 +7,11 @@
 </div>
 
 <div class="page-meta meta panel panel-default">
-	<div class="panel-heading">
-		<h3 class="panel-title">info</h3>
-	</div>
 	<div class="panel-body">
 		{% if item.categories %}
 		<div class="page-categories">
 			{% for category in item.categories %}
-				<a href="../../categories/{{ category.titleshort }}/" class="category" title="Category: {{ category.title }}"><i class="glyphicon glyphicon-bookmark icon-white"></i> {{ category.title }}</a> 
+				<a href="{{ blog.url }}/categories/{{ category.titleshort }}/" class="category" title="Category: {{ category.title }}"><i class="glyphicon glyphicon-bookmark icon-white"></i> {{ category.title }}</a> 
 			{% endfor %}
 		</div>
 		{% endif %}
