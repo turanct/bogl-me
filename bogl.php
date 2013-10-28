@@ -71,7 +71,34 @@ $app['output'] = $app->protect(function($string, $mode = 'normal') use ($app) {
  */
 $app['init'] = $app->protect(function() use ($app) {
 	// Get command line options
-	$options = getopt('i::t::o::', array('input::', 'theme::', 'output::'));
+	$options = getopt('i::t::o::s::', array('input::', 'theme::', 'output::', 'site::'));
+
+	// Use predefined sites from the ~/.boglrc file
+	if (isset($options['s']) || isset($options['site'])) {
+		// Set the site variable
+		$site = (isset($options['s'])) ? $options['s'] : $options['site'] ;
+
+		// Get data from config file
+		$config = @json_decode(@file_get_contents(getenv('HOME').'/.boglrc'));
+
+		// Check the config
+		if (
+			empty($config)
+			|| !isset($config->$site)
+			|| !isset($config->$site->input)
+			|| !isset($config->$site->theme)
+			|| !isset($config->$site->output)
+		) {
+			$app['output']('Config file error.', 'error');
+		}
+		else {
+			$src = '~/';
+			$rpl = getenv('HOME') . '/';
+			$app['rc.markdowndir'] = str_replace($src, $rpl, $config->$site->input);
+			$app['rc.themedir'] = str_replace($src, $rpl, $config->$site->theme);
+			$app['rc.htmldir'] = str_replace($src, $rpl, $config->$site->output);
+		}
+	}
 
 	// Set input directory
 	if (isset($options['i'])) {
@@ -82,6 +109,9 @@ $app['init'] = $app->protect(function() use ($app) {
 	}
 	elseif (getenv('BOGL_INPUT')) {
 		$app['markdowndir'] = realpath(getenv('BOGL_INPUT'));
+	}
+	elseif ($app['rc.markdowndir']) {
+		$app['markdowndir'] = $app['rc.markdowndir'];
 	}
 	else {
 		$app['markdowndir'] = __DIR__.'/content';
@@ -97,6 +127,9 @@ $app['init'] = $app->protect(function() use ($app) {
 	elseif (getenv('BOGL_THEME')) {
 		$app['themedir'] = realpath(getenv('BOGL_THEME'));
 	}
+	elseif ($app['rc.themedir']) {
+		$app['themedir'] = $app['rc.themedir'];
+	}
 	else {
 		$app['themedir'] = __DIR__.'/theme';
 	}
@@ -110,6 +143,9 @@ $app['init'] = $app->protect(function() use ($app) {
 	}
 	elseif (getenv('BOGL_OUTPUT')) {
 		$app['htmldir'] = realpath(getenv('BOGL_OUTPUT'));
+	}
+	elseif ($app['rc.htmldir']) {
+		$app['htmldir'] = $app['rc.htmldir'];
 	}
 	else {
 		$app['htmldir'] = __DIR__.'/html';
