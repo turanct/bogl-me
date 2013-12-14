@@ -101,7 +101,15 @@ class Page {
 	 */
 	public function render() {
 		// Get template
-		$template = (file_exists($this->app['themedir'].'/page.html')) ? 'page.html' : 'post.html';
+		if (file_exists($this->app['themedir'].'/page-'.$this->filename.'.html')) {
+			$template = 'page-'.$this->filename.'.html';
+		}
+		elseif (file_exists($this->app['themedir'].'/page.html')) {
+			$template = 'page.html';
+		}
+		else {
+			$template = 'post.html';
+		}
 
 		// Get rendered html from twig
 		return $this->app['twig']->render($template, array('blog' => $this->app['blog'], 'item' => $this));
