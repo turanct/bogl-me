@@ -152,9 +152,16 @@ Then, run Bogl without arguments:
 5. Installing Bogl on your system
 ----------------------------------------
 
+### Installing
+
 Assuming you're on Mac OSX or GNU/Linux with `git`, `php` and `curl` installed:
 
-	BOGL_PWD=`pwd` && git clone https://github.com/turanct/bogl-me.git /usr/local/bogl && cd /usr/local/bogl && curl -sS https://getcomposer.org/installer | php && php composer.phar install && ln -s /usr/local/bogl/bogl.php /usr/local/bin/bogl && cd $BOGL_PWD
+	git clone https://github.com/turanct/bogl-me.git /usr/local/bogl && cd /usr/local/bogl && curl -sS https://getcomposer.org/installer | php && php composer.phar install && ln -s /usr/local/bogl/bogl.php /usr/local/bin/bogl && cd -
+
+
+### Updating
+
+	cd /usr/local/bogl && git pull origin master && php composer.phar update && cd -
 
 
 
