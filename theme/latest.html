@@ -2,6 +2,8 @@
 
 {% block content %}
 
+{% for item in items|slice(0, blog.latest) %}
 {% include 'single-post.html' %}
+{% endfor %}
 
 {% endblock %}
