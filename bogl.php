@@ -218,6 +218,11 @@ $app['render.special'] = $app->protect(function() use ($app) {
 			$rendered = $post->render();
 			break;
 
+		case 'latest':
+			$posts = $app['blog']->latest();
+			$rendered = $posts->render();
+			break;
+
 		case 'static':
 		default:
 			$rendered = $app['twig']->render('index.html', array('blog' => $app['blog'], 'item' => array('title' => 'Home')));

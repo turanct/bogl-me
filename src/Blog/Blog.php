@@ -78,6 +78,14 @@ class Blog {
 
 
 	/**
+	 * Method to get the latest x posts
+	 */
+	public function latest() {
+		return new Latest($this->app, $this->posts());
+	}
+
+
+	/**
 	 * Rss method
 	 */
 	public function rss() {
