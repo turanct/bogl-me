@@ -207,14 +207,14 @@ $app['render.special'] = $app->protect(function() use ($app) {
 	// Render the home page
 	switch ($app['blog']->home) {
 		case 'page':
-			$page = new Blog\Page($app, 'index.md');
+			$filename = (isset($app['blog']->page)) ? $app['blog']->page : 'index';
+			$page = new Blog\Page($app, $filename);
 			$rendered = $page->render();
 			break;
 
 		case 'post':
-			$posts = $app['blog']->posts();
-			$posts->rewind();
-			$post = $posts->current();
+			$filename = (isset($app['blog']->post)) ? $app['blog']->post : '';
+			$post = new Blog\Post($app, $filename);
 			$rendered = $post->render();
 			break;
 
