@@ -29,7 +29,8 @@ Bogl is a simple static blog generator in php. It uses plain Markdown files as p
 		"titleshort": "Bogl",
 		"url": "http://bogl.dev",
 		"rss": false,
-		"home": "last-post"
+		"home": "latest",
+		"latest": 3
 	}
 
 The `title` and `titleshort` values are self-explanatory.
@@ -41,9 +42,9 @@ The `rss` value defines if an rss feed will be generated. For this to work, you'
 The `home` value defines what your homepage should look like. Possible values:
 
 * `static` This will take the 'index.html' template from the theme directory and render it.
-* `page` This will use the 'index.md' page file, and render it using the 'page.html' template.
-* `post` This will render the last post using the post.html template.
-* `posts` This will render all posts using the posts.html template file. **To be implemented**
+* `page` This will render a specific page using the page.html template. If you don't specify which page should be displayed like this `"page": "name-of-the-page"`, bogl will show the 'index.md' page file by default.
+* `post` This will render a specific post using the post.html template. You must specify which post should be displayed like this `"post": "name-of-the-post"`. The name that you specify equals to the name of the post in your `content` directory without the `.md` extension.
+* `latest` This will render a number of latest posts using the latest.html template file. You can specify the number of posts that will be displayed like this `"latest": 5`.
 
 Make sure that if you provide a value, you also make sure the necessary files are present. If not, we'll show the static front-page.
 
@@ -81,7 +82,9 @@ This is where you define what your blog looks like. You can use html, css & java
 
 These are optional:
 
+* `latest.html` This file contains the template for showing latest posts on the home page.
 * `page.html` This file contains the template for pages.
+* `page-{page-name}.html` This file contains the template for a specific page.
 * `tag.html` This file contains the template for tag overviews.
 * `posts.html` This file contains the template for the home page 'posts' mode.
 * `archive-posts.html` This file contains the template for the overview of all posts.
