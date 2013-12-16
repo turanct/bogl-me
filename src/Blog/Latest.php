@@ -27,6 +27,11 @@ class Latest {
 		// Assign
 		$this->app = $app;
 		$this->items = $itemlist;
+
+		// Fallback for when latest number is not set
+		if (!isset($this->app['blog']->latest)) {
+			$this->app['blog']->latest = 5;
+		}
 	}
 
 
