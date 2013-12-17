@@ -136,6 +136,22 @@ Bogl has to know three paths to compile your blog:
 
 	bogl -i={path to content directory} -t={path to theme directory} -o={path to html directory}
 
+### Using `.boglrc` (recommended)
+
+Create a file in your home directory `~/.boglrc`
+
+	{
+		"{site name}": {
+			"input": "{path to content directory}",
+			"theme": "{path to theme directory}",
+			"output": "{path to html directory}"
+		}
+	}
+
+You can define as many bogl projects in there as you want. For the example we only have one. We can now compile our blog like this:
+
+	bogl --site={site name}
+
 ### Using environment variables ($ENV)
 
 #### Using `.bashrc`
