@@ -137,6 +137,10 @@ pre code {
 	background-color: #1e3442;
 }
 
+.navbar a.active {
+	background-color: #1e3442;
+}
+
 
 /* ---------------- Content ---------------- */
 .jumbotron {

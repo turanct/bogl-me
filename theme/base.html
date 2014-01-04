@@ -32,13 +32,17 @@
 		<div class="navbar navbar-default navbar-static-top">
 			<div class="container">
 				<div class="navbar-header">
-					<a class="navbar-brand" href="{{ blog.url }}">{{ blog.titleshort }}</a>
+					<a class="navbar-brand{% if item.title == 'Home' %} active{% endif %}" href="{{ blog.url }}">{{ blog.titleshort }}</a>
 				</div>
 				<div class="navbar-collapse">
 					<ul class="nav navbar-nav">
-						<li><a href="{{ blog.url }}/posts/">Archive</a></li>
+						<li><a href="{{ blog.url }}/posts/"{% if item.title == 'Posts' %} class="active"{% endif %}>Archive</a></li>
 						{% for page in blog.pages %}
+						    {% if page.title == item.title %}
+							<li><a href="{{ blog.url }}/pages/{{ page.titleshort }}" class="active">{{ page.title }}</a></li>
+							{% else %}
 							<li><a href="{{ blog.url }}/pages/{{ page.titleshort }}">{{ page.title }}</a></li>
+							{% endif %}
 						{% endfor %}
 					</ul>
 				</div>
